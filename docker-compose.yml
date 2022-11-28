@@ -1,0 +1,53 @@
+version: '3.9'
+
+services:
+  db:
+    image: mariadb:10.5.9
+    restart: always
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: 's3cr3t'
+      MYSQL_USER: 'username'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_DATABASE: 'customers'
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u root --password=s3cr3t
+      interval: 5s
+      retries: 5
+
+  db_admin:
+    image: phpmyadmin/phpmyadmin:5
+    ports:
+      - '8081:80'
+    environment:
+      - PMA_HOST=db
+      - PMA_ABSOLUTE_URI=http://localhost:8001/
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - db_admin_data:/var/www/html
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      MYSQL_HOST: 'db'
+      MYSQL_DATABASE: 'customers'
+      MYSQL_USERNAME: 'root'
+      MYSQL_PASSWORD: 's3cr3t'
+      SQL_QUERIES_SHOW: true
+      SQL_QUERIES_FORMAT: true
+    ports:
+      - '8080:8080'
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  db_data:
+  db_admin_data:

@@ -1,0 +1,9 @@
+FROM maven:3.8.3-amazoncorretto-17 AS build-env
+ADD . /work
+WORKDIR /work
+RUN mvn clean install
+
+FROM amazoncorretto:17
+COPY --from=build-env /work/target/api-crud-1.0-SNAPSHOT.jar /app/api-crud-1.0-SNAPSHOT.jar
+WORKDIR /app
+CMD ["sh", "-c", "java -jar -Dspring.profiles.active=deploy target/api-crud-1.0-SNAPSHOT.jar"]
