@@ -3,15 +3,15 @@ spring:
     platform: mysql
     url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:mydb}
     username: ${MYSQL_USERNAME:root}
-    password: ${MYSQL_USERNAME:password}
+    password: ${MYSQL_PASSWORD:password}
     driverClassName: com.mysql.cj.jdbc.Driver
   jpa:
     database-platform: org.hibernate.dialect.MySQL5Dialect
     defer-datasource-initialization: true
     hibernate:
       ddl-auto: update
-    show-sql: ${FORMAT_SHOW_SQL:false}
+    show-sql: ${SQL_QUERIES_SHOW:false}
     properties:
       hibernate:
-        format_sql: ${SQL_FORMAT:false}
+        format_sql: ${SQL_QUERIES_FORMAT:false}
 
