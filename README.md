@@ -34,13 +34,69 @@ mvn test
 
 #### Running the application
 
+##### Test Environment
+
+Test environment will use H2SQL in memory mode to persist your test data
+
 ```shell
 mvn spring-boot:run
+```
+
+or using just Java
+```shell
+mvn clean install
+java -jar target/api-crud-1.0-SNAPSHOT.jar 
+```
+
+##### Local Environment
+
+Local environment will use H2SQL in file to persist your changes
+
+```shell
+mvn spring-boot:run -Dspring.profiles.active=local
+```
+
+or using just Java
+```shell
+mvn clean install
+java -jar -Dspring.profiles.active=local target/api-crud-1.0-SNAPSHOT.jar 
+```
+
+##### Prod Environment
+
+Running Docker MariaDB to provide Database support and run the application using your own Machine (for test and debug)
+
+- To create the MariaDB container, if it is not created
+```shell
+docker run --name db -d -e MARIADB_ROOT_PASSWORD=password -e MARIADB_DATABASE=mydb mariadb:latest
+```
+- To stop the MariaDB container, if the container is already running
+```shell
+docker stop db
+```
+- To restart the MariaDB container, if the container is already created do
+```shell
+docker start db
+```
+- To remove the MariaDB container, stop the container first and then
+```shell
+docker rm db
+```
+
+Then, start the application using maven
+```shell
+mvn spring-boot:run
+```
+... or execute directly from the JAR file, after you build it usinbg maven
+```shell
+mvn clean install
+java -jar -Dspring.profiles.active=deploy target/api-crud-1.0-SNAPSHOT.jar 
 ```
 
 ### Using IDE
 
 I used [IntelliJ Idea](https://www.jetbrains.com/idea/) from [JetBrains](https://www.jetbrains.com/)  to build this application but you also can use [Eclipse](https://www.eclipse.org/downloads/), or [Netbeans](https://netbeans.apache.org/download/index.html) to run this application.
+
 
 ## Documentation
 
