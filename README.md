@@ -113,6 +113,8 @@ export SQL_QUERIES_FORMAT=true
 java -jar -Dspring.profiles.active=deploy target/api-crud-1.0-SNAPSHOT.jar 
 ```
 
+It works because the `application-deploy.yml` profile has placeholders to find the value from the environment variables or use a _default value_. Please realize when you create your local MariaDB container you set the all parameters to match default profile values.
+
 ### Using IDE
 
 I used [IntelliJ Idea](https://www.jetbrains.com/idea/) from [JetBrains](https://www.jetbrains.com/)  to build this application but you also can use [Eclipse](https://www.eclipse.org/downloads/), or [Netbeans](https://netbeans.apache.org/download/index.html) to run this application.
