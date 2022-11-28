@@ -53,7 +53,7 @@ java -jar target/api-crud-1.0-SNAPSHOT.jar
 Local environment will use H2SQL in file to persist your changes
 
 ```shell
-mvn spring-boot:run -Dspring.profiles.active=local
+mvn spring-boot:run -Dspring-boot.run.profiles=local
 ```
 
 or using just Java
@@ -85,7 +85,7 @@ docker rm db
 
 Then, start the application using maven
 ```shell
-mvn spring-boot:run
+mvn spring-boot:run -Dspring-boot.run.profiles=deploy
 ```
 ... or execute directly from the JAR file, after you build it usinbg maven
 ```shell
