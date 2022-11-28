@@ -1,12 +1,12 @@
 spring:
   datasource:
     platform: mysql
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:mydb}
+    url: jdbc:mariadb://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:mydb}
     username: ${MYSQL_USERNAME:root}
     password: ${MYSQL_PASSWORD:password}
-    driverClassName: com.mysql.cj.jdbc.Driver
+    driverClassName: org.mariadb.jdbc.Driver
   jpa:
-    database-platform: org.hibernate.dialect.MySQL5Dialect
+    database-platform: org.hibernate.dialect.MariaDB103Dialect
     defer-datasource-initialization: true
     hibernate:
       ddl-auto: update
